@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mission to Mars</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../static/mars.css">
+    <script src="https://www.w3schools.com/lib/w3data.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="text-center">
+            <h1>
+                <a href="/" class="mission">Mission to Mars</a>
+            </h1>
+            <a href="scrape" class="btn btn-primary" role="button">Click to Scrape!</a>
+        </div>
+    </header>
+
+    <!-- Mars News -->
+    <div class="container" style="width:100%">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Latest Mars News</h2>
+                {%for news in News_dict%}
+                <li>
+                    <h3>{{news.Headline}}</h3>
+                    <p>{{news.Details}}</p>
+                </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Image / Weather Tweet/ Mars Fact table -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel">
+                <div class="panel-body">
+                    <h2>Featured Mars Image</h2>
+                    {%for image in featured_Image_dict%}
+                    <img src='{{image.image}}' alt="" class="featured"> {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel border">
+                <div class="panel-body">
+                    <h2>Current Weather on Mars</h2>
+                    {%for weather in mars_weather_dict%}
+                    <p>{{ weather.mars_weather }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <h2>Mars Facts</h2>
+                    <div class="container">
+                        <div class="intrinsic-container intrinsic-container-16x9">
+                            <iframe src="{{url_for('static', filename='mars_table.html')}}"></iframe>
+                        </div>
+                        <!-- <embed src="{{url_for('static', filename='mars_table.html')}}"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <!--Hemispheres -->
+    <h2 class="hemispheres">Mars Hemispheres</h2>
+    <div class="row" style="padding-bottom:25px">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 border">
+            {%for images in full_hemisphere_dict%}
+            <img src={{ images.image_one }} alt="" style="width:100%">
+            <p class="caption">Cereberus</p>
+        </div>
+        <div class="col-sm-5 border">
+            <img src={{ images.image_two }} alt="" style="width:100%">
+            <p class="caption">Schiaparelli Hemisphere</p>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 border">
+            <img src={{ images.image_three }} alt="" style="width:100%">
+            <p class="caption">Syrtis Major Hemisphere</p>
+        </div>
+        <div class="col-sm-5 border">
+            <img src={{ images.image_four }} alt="" style="width:100%">
+            <p class="caption">Valles Marineris Hemisphere</p>
+            {% endfor %}
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+
+</html>
